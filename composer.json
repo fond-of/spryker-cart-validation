@@ -9,8 +9,7 @@
     }
   ],
   "require": {
-    "php": ">=7.1",
-    "spryker/cart": "^5.0.0"
+    "php": ">=7.1"
   },
   "require-dev": {
     "spryker/code-sniffer": "^0.12",
