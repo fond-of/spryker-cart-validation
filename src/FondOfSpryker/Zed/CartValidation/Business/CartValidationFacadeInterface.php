@@ -13,5 +13,5 @@ interface CartValidationFacadeInterface
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function clearCartItemValidationMessages(QuoteTransfer $quoteTransfer): QuoteTransfer;
+    public function clearQuoteItemValidationMessages(QuoteTransfer $quoteTransfer): QuoteTransfer;
 }

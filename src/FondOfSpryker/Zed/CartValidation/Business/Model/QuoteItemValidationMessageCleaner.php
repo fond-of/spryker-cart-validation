@@ -1,14 +1,14 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace FondOfSpryker\Zed\CartValidation\Business\Model;
 
+use ArrayObject;
 use Generated\Shared\Transfer\ItemTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
-use ArrayObject;
 
-class CartItemValidationMessageCleaner implements CartItemValidationMessageCleanerInterface
+class QuoteItemValidationMessageCleaner implements QuoteItemValidationMessageCleanerInterface
 {
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer

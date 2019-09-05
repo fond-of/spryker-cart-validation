@@ -17,7 +17,7 @@ class CartValidationFacade extends AbstractFacade implements CartValidationFacad
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function clearCartItemValidationMessages(QuoteTransfer $quoteTransfer): QuoteTransfer
+    public function clearQuoteItemValidationMessages(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
         return $this->getFactory()
             ->createCartItemValidationMessageCleaner()

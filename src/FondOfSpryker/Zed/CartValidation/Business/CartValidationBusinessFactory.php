@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace FondOfSpryker\Zed\CartValidation\Business;
 
-use FondOfSpryker\Zed\CartValidation\Business\Model\CartItemValidationMessageCleaner;
-use FondOfSpryker\Zed\CartValidation\Business\Model\CartItemValidationMessageCleanerInterface;
+use FondOfSpryker\Zed\CartValidation\Business\Model\QuoteItemValidationMessageCleaner;
+use FondOfSpryker\Zed\CartValidation\Business\Model\QuoteItemValidationMessageCleanerInterface;
 use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
 
 /**
@@ -14,10 +14,10 @@ use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
 class CartValidationBusinessFactory extends AbstractBusinessFactory
 {
     /**
-     * @return \FondOfSpryker\Zed\CartValidation\Business\Model\CartItemValidationMessageCleanerInterface
+     * @return \FondOfSpryker\Zed\CartValidation\Business\Model\QuoteItemValidationMessageCleanerInterface
      */
-    public function createCartItemValidationMessageCleaner(): CartItemValidationMessageCleanerInterface
+    public function createCartItemValidationMessageCleaner(): QuoteItemValidationMessageCleanerInterface
     {
-        return new CartItemValidationMessageCleaner();
+        return new QuoteItemValidationMessageCleaner();
     }
 }
