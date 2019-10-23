@@ -27,11 +27,6 @@ class QuoteValidationMessageTranslatorRelationshipExpander implements QuoteValid
     protected $localeClient;
 
     /**
-     * @var string[]
-     */
-    protected $translationCache = [];
-
-    /**
      * @param \Spryker\Client\GlossaryStorage\GlossaryStorageClientInterface $glossaryStorageClient
      * @param \Spryker\Client\Locale\LocaleClientInterface $localeClient
      */
@@ -112,67 +107,25 @@ class QuoteValidationMessageTranslatorRelationshipExpander implements QuoteValid
     protected function translateValidationMessage(MessageTransfer $validationMessage) : MessageTransfer
     {
         return $validationMessage->setValue(
-            $this->getTranslation(
-                $validationMessage->getValue()
+            $this->translate(
+                $validationMessage->getValue(),
+                $validationMessage->getParameters()
             )
+        )->setParameters([]);
+    }
+
+    /**
+     * @param string $translationKey
+     * @param array $parameters
+     *
+     * @return string
+     */
+    protected function translate(string $translationKey, array $parameters): string
+    {
+        return $this->glossaryStorageClient->translate(
+            $translationKey,
+            $this->localeClient->getCurrentLocale(),
+            $parameters
         );
-    }
-
-    /**
-     * @param string $translationKey
-     *
-     * @return string
-     */
-    protected function getTranslation(string $translationKey) : string
-    {
-        if (! $this->hasTranslationInCache($translationKey)) {
-            $this->storeTranslationInCache(
-                $translationKey,
-                $this->translate($translationKey)
-            );
-        }
-
-        return $this->getTranslationFromCache($translationKey);
-    }
-
-    /**
-     * @param string $translationKey
-     *
-     * @return string
-     */
-    protected function getTranslationFromCache(string $translationKey): string
-    {
-        return $this->translationCache[$translationKey];
-    }
-
-    /**
-     * @param string $translationKey
-     * @param string $translation
-     *
-     * @return void
-     */
-    protected function storeTranslationInCache(string $translationKey, string $translation): void
-    {
-        $this->translationCache[$translationKey] = $translation;
-    }
-
-    /**
-     * @param string $translationKey
-     *
-     * @return bool
-     */
-    protected function hasTranslationInCache(string $translationKey) : bool
-    {
-        return array_key_exists($translationKey, $this->translationCache);
-    }
-
-    /**
-     * @param string $translationKey
-     *
-     * @return string
-     */
-    protected function translate(string $translationKey): string
-    {
-        return $this->glossaryStorageClient->translate($translationKey, $this->localeClient->getCurrentLocale());
     }
 }
