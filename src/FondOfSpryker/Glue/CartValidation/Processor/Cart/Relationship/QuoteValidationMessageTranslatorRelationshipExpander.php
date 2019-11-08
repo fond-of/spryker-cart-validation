@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace FondOfSpryker\Glue\CartValidation\Processor\Cart\Relationship;
 
@@ -47,7 +47,6 @@ class QuoteValidationMessageTranslatorRelationshipExpander implements QuoteValid
     public function addResourceRelationships(array $resources, RestRequestInterface $restRequest): array
     {
         foreach ($resources as $resource) {
-
             $payload = $resource->getPayload();
 
             if ($payload instanceof QuoteTransfer) {
@@ -79,7 +78,7 @@ class QuoteValidationMessageTranslatorRelationshipExpander implements QuoteValid
      *
      * @return void
      */
-    protected function translateItemsResourceRelationships(RestResource $resource) : void
+    protected function translateItemsResourceRelationships(RestResource $resource): void
     {
         foreach ($resource->getRelationships() as $resourceName => $relationshipResourceArray) {
             if ($resourceName !== static::RESOURCE_ITEMS) {
@@ -104,7 +103,7 @@ class QuoteValidationMessageTranslatorRelationshipExpander implements QuoteValid
      *
      * @return \Generated\Shared\Transfer\MessageTransfer
      */
-    protected function translateValidationMessage(MessageTransfer $validationMessage) : MessageTransfer
+    protected function translateValidationMessage(MessageTransfer $validationMessage): MessageTransfer
     {
         return $validationMessage->setValue(
             $this->translate(
