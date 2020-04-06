@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace FondOfSpryker\Glue\CartValidation;
 
@@ -18,8 +18,8 @@ class CartValidationFactory extends AbstractFactory
     /**
      * @return \FondOfSpryker\Glue\CartValidation\Processor\Cart\Relationship\QuoteValidationMessageTranslatorRelationshipExpanderInterface
      */
-    public function createQuoteValidationMessageTranslatorRelationshipExpander(
-    ): QuoteValidationMessageTranslatorRelationshipExpanderInterface {
+    public function createQuoteValidationMessageTranslatorRelationshipExpander(): QuoteValidationMessageTranslatorRelationshipExpanderInterface
+    {
         return new QuoteValidationMessageTranslatorRelationshipExpander(
             $this->getGlossaryStorageClient(),
             $this->getLocaleClient()
@@ -27,6 +27,8 @@ class CartValidationFactory extends AbstractFactory
     }
 
     /**
+     * @throws
+     *
      * @return \Spryker\Client\GlossaryStorage\GlossaryStorageClientInterface
      */
     public function getGlossaryStorageClient(): GlossaryStorageClientInterface
@@ -35,6 +37,8 @@ class CartValidationFactory extends AbstractFactory
     }
 
     /**
+     * @throws
+     *
      * @return \Spryker\Client\Locale\LocaleClientInterface
      */
     public function getLocaleClient(): LocaleClientInterface

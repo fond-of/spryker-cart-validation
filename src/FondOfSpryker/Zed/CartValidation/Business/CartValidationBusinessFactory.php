@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace FondOfSpryker\Zed\CartValidation\Business;
 
@@ -10,6 +10,7 @@ use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
 
 /**
  * @method \FondOfSpryker\Zed\CartValidation\Business\CartValidationFacadeInterface getFacade()
+ * @method \FondOfSpryker\Zed\CartValidation\CartValidationConfig getConfig()
  */
 class CartValidationBusinessFactory extends AbstractBusinessFactory
 {

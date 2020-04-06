@@ -5,4 +5,12 @@
     <transfer name="Item">
         <property name="validationMessages" type="Message[]" singular="validationMessage"/>
     </transfer>
+
+    <transfer name="Quote">
+        <property name="items" type="Item[]" singular="item"/>
+    </transfer>
+
+    <transfer name="RestItemsAttributes">
+        <property name="validationMessages" type="Message[]" singular="validationMessage"/>
+    </transfer>
 </transfers>
