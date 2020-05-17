@@ -27,8 +27,6 @@ class CartValidationFactory extends AbstractFactory
     }
 
     /**
-     * @throws
-     *
      * @return \Spryker\Client\GlossaryStorage\GlossaryStorageClientInterface
      */
     public function getGlossaryStorageClient(): GlossaryStorageClientInterface
@@ -37,8 +35,6 @@ class CartValidationFactory extends AbstractFactory
     }
 
     /**
-     * @throws
-     *
      * @return \Spryker\Client\Locale\LocaleClientInterface
      */
     public function getLocaleClient(): LocaleClientInterface
