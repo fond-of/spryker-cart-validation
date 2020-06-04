@@ -13,7 +13,7 @@ use Spryker\Zed\QuoteExtension\Dependency\Plugin\QuoteExpanderPluginInterface;
 class ClearQuoteItemValidationMessagesQuoteExpanderPlugin extends AbstractPlugin implements QuoteExpanderPluginInterface
 {
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *

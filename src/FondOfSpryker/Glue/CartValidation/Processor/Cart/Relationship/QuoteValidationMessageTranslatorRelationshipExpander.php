@@ -86,8 +86,10 @@ class QuoteValidationMessageTranslatorRelationshipExpander implements QuoteValid
             }
 
             foreach ($relationshipResourceArray as $relationshipResource) {
-                if (!($relationshipResource instanceof RestResource)
-                    || !($relationshipResource->getAttributes() instanceof RestItemsAttributesTransfer)) {
+                if (
+                    !($relationshipResource instanceof RestResource)
+                    || !($relationshipResource->getAttributes() instanceof RestItemsAttributesTransfer)
+                ) {
                     continue;
                 }
 
