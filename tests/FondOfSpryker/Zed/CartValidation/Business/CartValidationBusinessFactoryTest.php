@@ -3,8 +3,8 @@
 namespace FondOfSpryker\Zed\CartValidation\Business;
 
 use Codeception\Test\Unit;
-use Zed\CartValidation\Business\Clearer\QuoteItemValidationMessageClearer;
-use Zed\CartValidation\Business\Clearer\QuoteValidationMessageClearer;
+use FondOfSpryker\Zed\CartValidation\Business\Clearer\QuoteItemValidationMessageClearer;
+use FondOfSpryker\Zed\CartValidation\Business\Clearer\QuoteValidationMessageClearer;
 
 class CartValidationBusinessFactoryTest extends Unit
 {
