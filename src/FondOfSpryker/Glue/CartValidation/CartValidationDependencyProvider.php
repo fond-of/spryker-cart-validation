@@ -7,9 +7,6 @@ namespace FondOfSpryker\Glue\CartValidation;
 use Spryker\Glue\Kernel\AbstractBundleDependencyProvider;
 use Spryker\Glue\Kernel\Container;
 
-/**
- * @method \FondOfSpryker\Glue\CartValidation\CartValidationConfig getConfig()
- */
 class CartValidationDependencyProvider extends AbstractBundleDependencyProvider
 {
     public const CLIENT_GLOSSARY_STORAGE = 'CLIENT_GLOSSARY_STORAGE';

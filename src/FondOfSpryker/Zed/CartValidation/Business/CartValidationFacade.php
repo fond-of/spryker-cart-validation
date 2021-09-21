@@ -13,6 +13,10 @@ use Spryker\Zed\Kernel\Business\AbstractFacade;
 class CartValidationFacade extends AbstractFacade implements CartValidationFacadeInterface
 {
     /**
+     * {@inheritDoc}
+     *
+     * @api
+     *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
@@ -20,7 +24,23 @@ class CartValidationFacade extends AbstractFacade implements CartValidationFacad
     public function clearQuoteItemValidationMessages(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
         return $this->getFactory()
-            ->createCartItemValidationMessageCleaner()
-            ->clearValidationMessages($quoteTransfer);
+            ->createQuoteItemValidationMessageClearer()
+            ->clear($quoteTransfer);
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer
+     */
+    public function clearQuoteValidationMessages(QuoteTransfer $quoteTransfer): QuoteTransfer
+    {
+        return $this->getFactory()
+        ->createQuoteValidationMessageClearer()
+        ->clear($quoteTransfer);
     }
 }

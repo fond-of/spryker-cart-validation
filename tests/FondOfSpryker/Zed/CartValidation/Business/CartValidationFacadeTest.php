@@ -3,20 +3,15 @@
 namespace FondOfSpryker\Zed\CartValidation\Business;
 
 use Codeception\Test\Unit;
-use FondOfSpryker\Zed\CartValidation\Business\Model\QuoteItemValidationMessageCleanerInterface;
 use Generated\Shared\Transfer\QuoteTransfer;
+use Zed\CartValidation\Business\Clearer\QuoteItemValidationMessageClearerInterface;
 
 class CartValidationFacadeTest extends Unit
 {
     /**
-     * @var \FondOfSpryker\Zed\CartValidation\Business\CartValidationFacade
-     */
-    protected $cartValidationFacade;
-
-    /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfSpryker\Zed\CartValidation\Business\CartValidationBusinessFactory
      */
-    protected $cartValidationBusinessFactoryMock;
+    protected $businessFactoryMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\QuoteTransfer
@@ -24,9 +19,19 @@ class CartValidationFacadeTest extends Unit
     protected $quoteTransferMock;
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfSpryker\Zed\CartValidation\Business\Model\QuoteItemValidationMessageCleanerInterface
+     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfSpryker\Zed\CartValidation\Business\Clearer\QuoteValidationMessageClearerInterface
      */
-    protected $quoteItemValidationMessageCleanerInterfaceMock;
+    protected $quoteValidationMessageClearerMock;
+
+    /**
+     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfSpryker\Zed\CartValidation\Business\Clearer\QuoteItemValidationMessageClearerInterface
+     */
+    protected $quoteItemValidationMessageClearerMock;
+
+    /**
+     * @var \FondOfSpryker\Zed\CartValidation\Business\CartValidationFacade
+     */
+    protected $facade;
 
     /**
      * @return void
@@ -35,7 +40,7 @@ class CartValidationFacadeTest extends Unit
     {
         parent::_before();
 
-        $this->cartValidationBusinessFactoryMock = $this->getMockBuilder(CartValidationBusinessFactory::class)
+        $this->businessFactoryMock = $this->getMockBuilder(CartValidationBusinessFactory::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -43,12 +48,31 @@ class CartValidationFacadeTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->quoteItemValidationMessageCleanerInterfaceMock = $this->getMockBuilder(QuoteItemValidationMessageCleanerInterface::class)
+        $this->quoteItemValidationMessageClearerMock = $this->getMockBuilder(QuoteItemValidationMessageClearerInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->cartValidationFacade = new CartValidationFacade();
-        $this->cartValidationFacade->setFactory($this->cartValidationBusinessFactoryMock);
+        $this->facade = new CartValidationFacade();
+        $this->facade->setFactory($this->businessFactoryMock);
+    }
+
+    /**
+     * @return void
+     */
+    public function testClearQuoteValidationMessages(): void
+    {
+        $this->businessFactoryMock->expects($this->atLeastOnce())
+            ->method('createQuoteValidationMessageCleaner')
+            ->willReturn($this->quoteValidationMessageClearerMock);
+
+        $this->quoteValidationMessageClearerMock->expects($this->atLeastOnce())
+            ->method('clear')
+            ->willReturn($this->quoteTransferMock);
+
+        static::assertEquals(
+            $this->quoteTransferMock,
+            $this->facade->clearQuoteValidationMessages($this->quoteTransferMock)
+        );
     }
 
     /**
@@ -56,17 +80,17 @@ class CartValidationFacadeTest extends Unit
      */
     public function testClearQuoteItemValidationMessages(): void
     {
-        $this->cartValidationBusinessFactoryMock->expects($this->atLeastOnce())
-            ->method('createCartItemValidationMessageCleaner')
-            ->willReturn($this->quoteItemValidationMessageCleanerInterfaceMock);
+        $this->businessFactoryMock->expects($this->atLeastOnce())
+            ->method('createQuoteItemValidationMessageCleaner')
+            ->willReturn($this->quoteItemValidationMessageClearerMock);
 
-        $this->quoteItemValidationMessageCleanerInterfaceMock->expects($this->atLeastOnce())
-            ->method('clearValidationMessages')
+        $this->quoteItemValidationMessageClearerMock->expects($this->atLeastOnce())
+            ->method('clear')
             ->willReturn($this->quoteTransferMock);
 
-        $this->assertInstanceOf(
-            QuoteTransfer::class,
-            $this->cartValidationFacade->clearQuoteItemValidationMessages($this->quoteTransferMock)
+        static::assertEquals(
+            $this->quoteTransferMock,
+            $this->facade->clearQuoteItemValidationMessages($this->quoteTransferMock)
         );
     }
 }

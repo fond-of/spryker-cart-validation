@@ -10,9 +10,6 @@ use Spryker\Client\GlossaryStorage\GlossaryStorageClientInterface;
 use Spryker\Client\Locale\LocaleClientInterface;
 use Spryker\Glue\Kernel\AbstractFactory;
 
-/**
- * @method \FondOfSpryker\Glue\CartValidation\CartValidationConfig getConfig()
- */
 class CartValidationFactory extends AbstractFactory
 {
     /**

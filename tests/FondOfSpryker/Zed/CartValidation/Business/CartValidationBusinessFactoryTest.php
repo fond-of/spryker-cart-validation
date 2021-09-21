@@ -3,14 +3,15 @@
 namespace FondOfSpryker\Zed\CartValidation\Business;
 
 use Codeception\Test\Unit;
-use FondOfSpryker\Zed\CartValidation\Business\Model\QuoteItemValidationMessageCleanerInterface;
+use Zed\CartValidation\Business\Clearer\QuoteItemValidationMessageClearer;
+use Zed\CartValidation\Business\Clearer\QuoteValidationMessageClearer;
 
 class CartValidationBusinessFactoryTest extends Unit
 {
     /**
      * @var \FondOfSpryker\Zed\CartValidation\Business\CartValidationBusinessFactory
      */
-    protected $cartValidationBusinessFactory;
+    protected $businessFactory;
 
     /**
      * @return void
@@ -19,17 +20,28 @@ class CartValidationBusinessFactoryTest extends Unit
     {
         parent::_before();
 
-        $this->cartValidationBusinessFactory = new CartValidationBusinessFactory();
+        $this->businessFactory = new CartValidationBusinessFactory();
     }
 
     /**
      * @return void
      */
-    public function testCreateCartItemValidationMessageCleaner(): void
+    public function testCreateQuoteValidationMessageClearer(): void
     {
         $this->assertInstanceOf(
-            QuoteItemValidationMessageCleanerInterface::class,
-            $this->cartValidationBusinessFactory->createCartItemValidationMessageCleaner()
+            QuoteValidationMessageClearer::class,
+            $this->businessFactory->createQuoteValidationMessageClearer()
+        );
+    }
+
+    /**
+     * @return void
+     */
+    public function testCreateQuoteItemValidationMessageClearer(): void
+    {
+        $this->assertInstanceOf(
+            QuoteItemValidationMessageClearer::class,
+            $this->businessFactory->createQuoteItemValidationMessageClearer()
         );
     }
 }

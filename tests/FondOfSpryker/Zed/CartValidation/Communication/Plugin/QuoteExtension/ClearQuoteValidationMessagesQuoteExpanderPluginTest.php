@@ -1,18 +1,13 @@
 <?php
 
-namespace FondOfSpryker\Zed\CartValidation\Communication\Plugin\CartExtension;
+namespace FondOfSpryker\Zed\CartValidation\Communication\Plugin\QuoteExtension;
 
 use Codeception\Test\Unit;
 use FondOfSpryker\Zed\CartValidation\Business\CartValidationFacade;
 use Generated\Shared\Transfer\QuoteTransfer;
 
-class ClearCartItemValidationMessagesPostReloadItemsPluginTest extends Unit
+class ClearQuoteValidationMessagesQuoteExpanderPluginTest extends Unit
 {
-    /**
-     * @var \FondOfSpryker\Zed\CartValidation\Communication\Plugin\CartExtension\ClearCartItemValidationMessagesPostReloadItemsPlugin
-     */
-    protected $clearCartItemValidationMessagesPostReloadItemsPlugin;
-
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfSpryker\Zed\CartValidation\Business\CartValidationFacade
      */
@@ -22,6 +17,11 @@ class ClearCartItemValidationMessagesPostReloadItemsPluginTest extends Unit
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\QuoteTransfer
      */
     protected $quoteTransferMock;
+
+    /**
+     * @var \FondOfSpryker\Zed\CartValidation\Communication\Plugin\QuoteExtension\ClearQuoteValidationMessagesQuoteExpanderPlugin
+     */
+    protected $plugin;
 
     /**
      * @return void
@@ -38,24 +38,22 @@ class ClearCartItemValidationMessagesPostReloadItemsPluginTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->clearCartItemValidationMessagesPostReloadItemsPlugin = new ClearCartItemValidationMessagesPostReloadItemsPlugin();
-        $this->clearCartItemValidationMessagesPostReloadItemsPlugin->setFacade($this->cartValidationFacadeMock);
+        $this->plugin = new ClearQuoteValidationMessagesQuoteExpanderPlugin();
+        $this->plugin->setFacade($this->cartValidationFacadeMock);
     }
 
     /**
      * @return void
      */
-    public function testPostReloadItems(): void
+    public function testExpand(): void
     {
         $this->cartValidationFacadeMock->expects($this->atLeastOnce())
-            ->method('clearQuoteItemValidationMessages')
+            ->method('clearQuoteValidationMessages')
             ->willReturn($this->quoteTransferMock);
 
-        $this->assertInstanceOf(
-            QuoteTransfer::class,
-            $this->clearCartItemValidationMessagesPostReloadItemsPlugin->postReloadItems(
-                $this->quoteTransferMock
-            )
+        static::assertEquals(
+            $this->quoteTransferMock,
+            $this->plugin->expand($this->quoteTransferMock)
         );
     }
 }

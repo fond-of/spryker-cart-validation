@@ -1,12 +1,12 @@
 <?php
 
-namespace FondOfSpryker\Zed\CartValidation\Communication\Plugin\QuoteExtension;
+namespace FondOfSpryker\Zed\CartValidation\Communication\Plugin\CartExtension;
 
 use Codeception\Test\Unit;
 use FondOfSpryker\Zed\CartValidation\Business\CartValidationFacade;
 use Generated\Shared\Transfer\QuoteTransfer;
 
-class ClearQuoteItemValidationMessagesQuoteExpanderPluginTest extends Unit
+class ClearQuoteItemValidationMessagesPostReloadItemsPluginTest extends Unit
 {
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfSpryker\Zed\CartValidation\Business\CartValidationFacade
@@ -19,7 +19,7 @@ class ClearQuoteItemValidationMessagesQuoteExpanderPluginTest extends Unit
     protected $quoteTransferMock;
 
     /**
-     * @var \FondOfSpryker\Zed\CartValidation\Communication\Plugin\QuoteExtension\ClearQuoteItemValidationMessagesQuoteExpanderPlugin
+     * @var \FondOfSpryker\Zed\CartValidation\Communication\Plugin\CartExtension\ClearQuoteItemValidationMessagesPostReloadItemsPlugin
      */
     protected $plugin;
 
@@ -38,14 +38,14 @@ class ClearQuoteItemValidationMessagesQuoteExpanderPluginTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->plugin = new ClearQuoteItemValidationMessagesQuoteExpanderPlugin();
+        $this->plugin = new ClearQuoteItemValidationMessagesPostReloadItemsPlugin();
         $this->plugin->setFacade($this->cartValidationFacadeMock);
     }
 
     /**
      * @return void
      */
-    public function testExpand(): void
+    public function testPostReloadItems(): void
     {
         $this->cartValidationFacadeMock->expects($this->atLeastOnce())
             ->method('clearQuoteItemValidationMessages')
@@ -53,7 +53,9 @@ class ClearQuoteItemValidationMessagesQuoteExpanderPluginTest extends Unit
 
         static::assertEquals(
             $this->quoteTransferMock,
-            $this->plugin->expand($this->quoteTransferMock)
+            $this->plugin->postReloadItems(
+                $this->quoteTransferMock
+            )
         );
     }
 }
