@@ -4,6 +4,7 @@ namespace FondOfSpryker\Zed\CartValidation\Business;
 
 use Codeception\Test\Unit;
 use FondOfSpryker\Zed\CartValidation\Business\Clearer\QuoteItemValidationMessageClearerInterface;
+use FondOfSpryker\Zed\CartValidation\Business\Clearer\QuoteValidationMessageClearerInterface;
 use Generated\Shared\Transfer\QuoteTransfer;
 
 class CartValidationFacadeTest extends Unit
@@ -45,6 +46,10 @@ class CartValidationFacadeTest extends Unit
             ->getMock();
 
         $this->quoteTransferMock = $this->getMockBuilder(QuoteTransfer::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->quoteValidationMessageClearerMock = $this->getMockBuilder(QuoteValidationMessageClearerInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
