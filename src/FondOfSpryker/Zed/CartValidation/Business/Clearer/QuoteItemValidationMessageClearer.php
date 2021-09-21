@@ -1,6 +1,6 @@
 <?php
 
-namespace Zed\CartValidation\Business\Clearer;
+namespace FondOfSpryker\Zed\CartValidation\Business\Clearer;
 
 use ArrayObject;
 use Generated\Shared\Transfer\QuoteTransfer;
