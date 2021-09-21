@@ -8,6 +8,7 @@
 
     <transfer name="Quote">
         <property name="items" type="Item[]" singular="item"/>
+        <property name="validationMessages" type="Message[]" singular="validationMessage"/>
     </transfer>
 
     <transfer name="RestItemsAttributes">
