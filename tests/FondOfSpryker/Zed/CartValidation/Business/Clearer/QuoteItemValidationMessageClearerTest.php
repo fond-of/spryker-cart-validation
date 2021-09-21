@@ -70,9 +70,9 @@ class QuoteItemValidationMessageClearerTest extends Unit
                 )
             )->willReturn($this->itemTransferMock);
 
-        $this->assertInstanceOf(
-            QuoteTransfer::class,
-            $this->quoteItemValidationMessageClearer->clearValidationMessages($this->quoteTransferMock)
+        static::assertEquals(
+            $this->quoteTransferMock,
+            $this->quoteItemValidationMessageClearer->clear($this->quoteTransferMock)
         );
     }
 }

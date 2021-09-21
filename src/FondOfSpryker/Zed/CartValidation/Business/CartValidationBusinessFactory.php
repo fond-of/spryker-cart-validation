@@ -4,16 +4,16 @@ declare(strict_types = 1);
 
 namespace FondOfSpryker\Zed\CartValidation\Business;
 
+use FondOfSpryker\Zed\CartValidation\Business\Clearer\QuoteItemValidationMessageClearer;
+use FondOfSpryker\Zed\CartValidation\Business\Clearer\QuoteItemValidationMessageClearerInterface;
+use FondOfSpryker\Zed\CartValidation\Business\Clearer\QuoteValidationMessageClearer;
+use FondOfSpryker\Zed\CartValidation\Business\Clearer\QuoteValidationMessageClearerInterface;
 use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
-use Zed\CartValidation\Business\Clearer\QuoteItemValidationMessageClearer;
-use Zed\CartValidation\Business\Clearer\QuoteItemValidationMessageClearerInterface;
-use Zed\CartValidation\Business\Clearer\QuoteValidationMessageClearer;
-use Zed\CartValidation\Business\Clearer\QuoteValidationMessageClearerInterface;
 
 class CartValidationBusinessFactory extends AbstractBusinessFactory
 {
     /**
-     * @return \Zed\CartValidation\Business\Clearer\QuoteValidationMessageClearerInterface
+     * @return \FondOfSpryker\Zed\CartValidation\Business\Clearer\QuoteValidationMessageClearerInterface
      */
     public function createQuoteValidationMessageClearer(): QuoteValidationMessageClearerInterface
     {
@@ -21,7 +21,7 @@ class CartValidationBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return \Zed\CartValidation\Business\Clearer\QuoteItemValidationMessageClearerInterface
+     * @return \FondOfSpryker\Zed\CartValidation\Business\Clearer\QuoteItemValidationMessageClearerInterface
      */
     public function createQuoteItemValidationMessageClearer(): QuoteItemValidationMessageClearerInterface
     {
