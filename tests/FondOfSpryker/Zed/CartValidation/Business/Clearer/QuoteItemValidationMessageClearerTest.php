@@ -65,7 +65,7 @@ class QuoteItemValidationMessageClearerTest extends Unit
             ->with(
                 static::callback(
                     static function (ArrayObject $validationMessages) {
-                        return $validationMessages->count() === 1;
+                        return $validationMessages->count() === 0;
                     }
                 )
             )->willReturn($this->itemTransferMock);

@@ -19,7 +19,7 @@ class ClearQuoteValidationMessagesPostReloadItemsPluginTest extends Unit
     protected $quoteTransferMock;
 
     /**
-     * @var \FondOfSpryker\Zed\CartValidation\Communication\Plugin\CartExtension\ClearQuoteItemValidationMessagesPostReloadItemsPlugin
+     * @var \FondOfSpryker\Zed\CartValidation\Communication\Plugin\CartExtension\ClearQuoteValidationMessagesPostReloadItemsPlugin
      */
     protected $plugin;
 
@@ -38,7 +38,7 @@ class ClearQuoteValidationMessagesPostReloadItemsPluginTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->plugin = new ClearQuoteItemValidationMessagesPostReloadItemsPlugin();
+        $this->plugin = new ClearQuoteValidationMessagesPostReloadItemsPlugin();
         $this->plugin->setFacade($this->cartValidationFacadeMock);
     }
 

@@ -62,7 +62,7 @@ class CartValidationFacadeTest extends Unit
     public function testClearQuoteValidationMessages(): void
     {
         $this->businessFactoryMock->expects($this->atLeastOnce())
-            ->method('createQuoteValidationMessageCleaner')
+            ->method('createQuoteValidationMessageClearer')
             ->willReturn($this->quoteValidationMessageClearerMock);
 
         $this->quoteValidationMessageClearerMock->expects($this->atLeastOnce())
@@ -81,7 +81,7 @@ class CartValidationFacadeTest extends Unit
     public function testClearQuoteItemValidationMessages(): void
     {
         $this->businessFactoryMock->expects($this->atLeastOnce())
-            ->method('createQuoteItemValidationMessageCleaner')
+            ->method('createQuoteItemValidationMessageClearer')
             ->willReturn($this->quoteItemValidationMessageClearerMock);
 
         $this->quoteItemValidationMessageClearerMock->expects($this->atLeastOnce())
