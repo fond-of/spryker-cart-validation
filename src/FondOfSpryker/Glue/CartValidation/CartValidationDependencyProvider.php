@@ -4,6 +4,8 @@ declare(strict_types = 1);
 
 namespace FondOfSpryker\Glue\CartValidation;
 
+use FondOfSpryker\Glue\CartValidation\Dependency\Client\CartValidationToGlossaryStorageClientBridge;
+use FondOfSpryker\Glue\CartValidation\Dependency\Client\CartValidationToLocaleClientBridge;
 use Spryker\Glue\Kernel\AbstractBundleDependencyProvider;
 use Spryker\Glue\Kernel\Container;
 
@@ -22,9 +24,8 @@ class CartValidationDependencyProvider extends AbstractBundleDependencyProvider
         $container = parent::provideDependencies($container);
 
         $container = $this->addGlossaryStorageClient($container);
-        $container = $this->addLocaleClient($container);
 
-        return $container;
+        return $this->addLocaleClient($container);
     }
 
     /**
@@ -35,7 +36,9 @@ class CartValidationDependencyProvider extends AbstractBundleDependencyProvider
     protected function addGlossaryStorageClient(Container $container): Container
     {
         $container[static::CLIENT_GLOSSARY_STORAGE] = static function (Container $container) {
-            return $container->getLocator()->glossaryStorage()->client();
+            return new CartValidationToGlossaryStorageClientBridge(
+                $container->getLocator()->glossaryStorage()->client()
+            );
         };
 
         return $container;
@@ -49,7 +52,9 @@ class CartValidationDependencyProvider extends AbstractBundleDependencyProvider
     protected function addLocaleClient(Container $container): Container
     {
         $container[static::CLIENT_LOCALE] = static function (Container $container) {
-            return $container->getLocator()->locale()->client();
+            return new CartValidationToLocaleClientBridge(
+                $container->getLocator()->locale()->client()
+            );
         };
 
         return $container;

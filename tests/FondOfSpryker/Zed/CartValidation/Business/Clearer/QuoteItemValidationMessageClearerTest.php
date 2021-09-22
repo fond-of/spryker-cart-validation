@@ -56,11 +56,11 @@ class QuoteItemValidationMessageClearerTest extends Unit
      */
     public function testClearValidationMessages(): void
     {
-        $this->quoteTransferMock->expects($this->atLeastOnce())
+        $this->quoteTransferMock->expects(static::atLeastOnce())
             ->method('getItems')
             ->willReturn($this->itemTransferMocks);
 
-        $this->itemTransferMock->expects($this->atLeastOnce())
+        $this->itemTransferMock->expects(static::atLeastOnce())
             ->method('setValidationMessages')
             ->with(
                 static::callback(

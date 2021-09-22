@@ -47,7 +47,7 @@ class ClearQuoteItemValidationMessagesQuoteExpanderPluginTest extends Unit
      */
     public function testExpand(): void
     {
-        $this->cartValidationFacadeMock->expects($this->atLeastOnce())
+        $this->cartValidationFacadeMock->expects(static::atLeastOnce())
             ->method('clearQuoteItemValidationMessages')
             ->with($this->quoteTransferMock)
             ->willReturn($this->quoteTransferMock);
