@@ -4,40 +4,37 @@ declare(strict_types = 1);
 
 namespace FondOfSpryker\Glue\CartValidation;
 
-use FondOfSpryker\Glue\CartValidation\Processor\Cart\Relationship\QuoteValidationMessageTranslatorRelationshipExpander;
-use FondOfSpryker\Glue\CartValidation\Processor\Cart\Relationship\QuoteValidationMessageTranslatorRelationshipExpanderInterface;
-use Spryker\Client\GlossaryStorage\GlossaryStorageClientInterface;
-use Spryker\Client\Locale\LocaleClientInterface;
+use FondOfSpryker\Glue\CartValidation\Dependency\Client\CartValidationToGlossaryStorageClientInterface;
+use FondOfSpryker\Glue\CartValidation\Dependency\Client\CartValidationToLocaleClientInterface;
+use FondOfSpryker\Glue\CartValidation\Processor\Translator\ValidationMessageTranslator;
+use FondOfSpryker\Glue\CartValidation\Processor\Translator\ValidationMessageTranslatorInterface;
 use Spryker\Glue\Kernel\AbstractFactory;
 
-/**
- * @method \FondOfSpryker\Glue\CartValidation\CartValidationConfig getConfig()
- */
 class CartValidationFactory extends AbstractFactory
 {
     /**
-     * @return \FondOfSpryker\Glue\CartValidation\Processor\Cart\Relationship\QuoteValidationMessageTranslatorRelationshipExpanderInterface
+     * @return \FondOfSpryker\Glue\CartValidation\Processor\Translator\ValidationMessageTranslatorInterface
      */
-    public function createQuoteValidationMessageTranslatorRelationshipExpander(): QuoteValidationMessageTranslatorRelationshipExpanderInterface
+    public function createValidationMessageTranslator(): ValidationMessageTranslatorInterface
     {
-        return new QuoteValidationMessageTranslatorRelationshipExpander(
+        return new ValidationMessageTranslator(
             $this->getGlossaryStorageClient(),
             $this->getLocaleClient()
         );
     }
 
     /**
-     * @return \Spryker\Client\GlossaryStorage\GlossaryStorageClientInterface
+     * @return \FondOfSpryker\Glue\CartValidation\Dependency\Client\CartValidationToGlossaryStorageClientInterface
      */
-    public function getGlossaryStorageClient(): GlossaryStorageClientInterface
+    public function getGlossaryStorageClient(): CartValidationToGlossaryStorageClientInterface
     {
         return $this->getProvidedDependency(CartValidationDependencyProvider::CLIENT_GLOSSARY_STORAGE);
     }
 
     /**
-     * @return \Spryker\Client\Locale\LocaleClientInterface
+     * @return \FondOfSpryker\Glue\CartValidation\Dependency\Client\CartValidationToLocaleClientInterface
      */
-    public function getLocaleClient(): LocaleClientInterface
+    public function getLocaleClient(): CartValidationToLocaleClientInterface
     {
         return $this->getProvidedDependency(CartValidationDependencyProvider::CLIENT_LOCALE);
     }

@@ -9,7 +9,7 @@ use Spryker\Zed\QuoteExtension\Dependency\Plugin\QuoteExpanderPluginInterface;
 /**
  * @method \FondOfSpryker\Zed\CartValidation\Business\CartValidationFacadeInterface getFacade()
  */
-class ClearQuoteItemValidationMessagesQuoteExpanderPlugin extends AbstractPlugin implements QuoteExpanderPluginInterface
+class ClearQuoteValidationMessagesQuoteExpanderPlugin extends AbstractPlugin implements QuoteExpanderPluginInterface
 {
     /**
      * {@inheritDoc}
@@ -22,6 +22,6 @@ class ClearQuoteItemValidationMessagesQuoteExpanderPlugin extends AbstractPlugin
      */
     public function expand(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
-        return $this->getFacade()->clearQuoteItemValidationMessages($quoteTransfer);
+        return $this->getFacade()->clearQuoteValidationMessages($quoteTransfer);
     }
 }

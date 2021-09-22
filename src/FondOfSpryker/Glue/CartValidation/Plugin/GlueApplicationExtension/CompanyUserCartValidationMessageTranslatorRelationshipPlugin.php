@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace FondOfSpryker\Glue\CartValidation\Plugin;
+namespace FondOfSpryker\Glue\CartValidation\Plugin\GlueApplicationExtension;
 
 use FondOfSpryker\Glue\CompanyUserCartsRestApi\CompanyUserCartsRestApiConfig;
 use Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequestInterface;
@@ -23,8 +23,8 @@ class CompanyUserCartValidationMessageTranslatorRelationshipPlugin extends Abstr
     public function addResourceRelationships(array $resources, RestRequestInterface $restRequest): void
     {
         $this->getFactory()
-            ->createQuoteValidationMessageTranslatorRelationshipExpander()
-            ->addResourceRelationships($resources, $restRequest);
+            ->createValidationMessageTranslator()
+            ->translate($resources);
     }
 
     /**

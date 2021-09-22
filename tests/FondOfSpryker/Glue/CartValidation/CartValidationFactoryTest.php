@@ -3,9 +3,9 @@
 namespace FondOfSpryker\Glue\CartValidation;
 
 use Codeception\Test\Unit;
-use FondOfSpryker\Glue\CartValidation\Processor\Cart\Relationship\QuoteValidationMessageTranslatorRelationshipExpander;
-use Spryker\Client\GlossaryStorage\GlossaryStorageClientInterface;
-use Spryker\Client\Locale\LocaleClientInterface;
+use FondOfSpryker\Glue\CartValidation\Dependency\Client\CartValidationToGlossaryStorageClientInterface;
+use FondOfSpryker\Glue\CartValidation\Dependency\Client\CartValidationToLocaleClientInterface;
+use FondOfSpryker\Glue\CartValidation\Processor\Translator\ValidationMessageTranslator;
 use Spryker\Glue\Kernel\Container;
 
 class CartValidationFactoryTest extends Unit
@@ -21,12 +21,12 @@ class CartValidationFactoryTest extends Unit
     protected $containerMock;
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Client\GlossaryStorage\GlossaryStorageClientInterface
+     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfSpryker\Glue\CartValidation\Dependency\Client\CartValidationToGlossaryStorageClientInterface
      */
     protected $glossaryStorageClientInterfaceMock;
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Client\Locale\LocaleClientInterface
+     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfSpryker\Glue\CartValidation\Dependency\Client\CartValidationToLocaleClientInterface
      */
     protected $localeClientInterfaceMock;
 
@@ -41,11 +41,11 @@ class CartValidationFactoryTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->glossaryStorageClientInterfaceMock = $this->getMockBuilder(GlossaryStorageClientInterface::class)
+        $this->glossaryStorageClientInterfaceMock = $this->getMockBuilder(CartValidationToGlossaryStorageClientInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->localeClientInterfaceMock = $this->getMockBuilder(LocaleClientInterface::class)
+        $this->localeClientInterfaceMock = $this->getMockBuilder(CartValidationToLocaleClientInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -56,13 +56,13 @@ class CartValidationFactoryTest extends Unit
     /**
      * @return void
      */
-    public function testCreateQuoteValidationMessageTranslatorRelationshipExpander(): void
+    public function testCreateValidationTranslator(): void
     {
-        $this->containerMock->expects($this->atLeastOnce())
+        $this->containerMock->expects(static::atLeastOnce())
             ->method('has')
             ->willReturn(true);
 
-        $this->containerMock->expects($this->atLeastOnce())
+        $this->containerMock->expects(static::atLeastOnce())
             ->method('get')
             ->withConsecutive(
                 [CartValidationDependencyProvider::CLIENT_GLOSSARY_STORAGE],
@@ -72,9 +72,9 @@ class CartValidationFactoryTest extends Unit
                 $this->localeClientInterfaceMock
             );
 
-        $this->assertInstanceOf(
-            QuoteValidationMessageTranslatorRelationshipExpander::class,
-            $this->cartValidationFactory->createQuoteValidationMessageTranslatorRelationshipExpander()
+        static::assertInstanceOf(
+            ValidationMessageTranslator::class,
+            $this->cartValidationFactory->createValidationMessageTranslator()
         );
     }
 }

@@ -10,9 +10,8 @@ use Spryker\Zed\Kernel\Communication\AbstractPlugin;
 
 /**
  * @method \FondOfSpryker\Zed\CartValidation\Business\CartValidationFacadeInterface getFacade()
- * @method \FondOfSpryker\Zed\CartValidation\CartValidationConfig getConfig()
  */
-class ClearCartItemValidationMessagesPostReloadItemsPlugin extends AbstractPlugin implements PostReloadItemsPluginInterface
+class ClearQuoteItemValidationMessagesPostReloadItemsPlugin extends AbstractPlugin implements PostReloadItemsPluginInterface
 {
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer

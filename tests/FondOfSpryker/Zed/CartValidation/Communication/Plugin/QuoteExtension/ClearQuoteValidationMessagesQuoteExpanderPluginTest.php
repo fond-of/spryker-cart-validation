@@ -6,7 +6,7 @@ use Codeception\Test\Unit;
 use FondOfSpryker\Zed\CartValidation\Business\CartValidationFacade;
 use Generated\Shared\Transfer\QuoteTransfer;
 
-class ClearQuoteItemValidationMessagesQuoteExpanderPluginTest extends Unit
+class ClearQuoteValidationMessagesQuoteExpanderPluginTest extends Unit
 {
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfSpryker\Zed\CartValidation\Business\CartValidationFacade
@@ -19,7 +19,7 @@ class ClearQuoteItemValidationMessagesQuoteExpanderPluginTest extends Unit
     protected $quoteTransferMock;
 
     /**
-     * @var \FondOfSpryker\Zed\CartValidation\Communication\Plugin\QuoteExtension\ClearQuoteItemValidationMessagesQuoteExpanderPlugin
+     * @var \FondOfSpryker\Zed\CartValidation\Communication\Plugin\QuoteExtension\ClearQuoteValidationMessagesQuoteExpanderPlugin
      */
     protected $plugin;
 
@@ -38,7 +38,7 @@ class ClearQuoteItemValidationMessagesQuoteExpanderPluginTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->plugin = new ClearQuoteItemValidationMessagesQuoteExpanderPlugin();
+        $this->plugin = new ClearQuoteValidationMessagesQuoteExpanderPlugin();
         $this->plugin->setFacade($this->cartValidationFacadeMock);
     }
 
@@ -48,7 +48,7 @@ class ClearQuoteItemValidationMessagesQuoteExpanderPluginTest extends Unit
     public function testExpand(): void
     {
         $this->cartValidationFacadeMock->expects(static::atLeastOnce())
-            ->method('clearQuoteItemValidationMessages')
+            ->method('clearQuoteValidationMessages')
             ->with($this->quoteTransferMock)
             ->willReturn($this->quoteTransferMock);
 

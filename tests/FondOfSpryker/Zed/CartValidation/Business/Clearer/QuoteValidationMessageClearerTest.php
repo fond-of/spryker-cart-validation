@@ -1,17 +1,18 @@
 <?php
 
-namespace FondOfSpryker\Zed\CartValidation\Business\Model;
+namespace FondOfSpryker\Zed\CartValidation\Business\Clearer;
 
+use ArrayObject;
 use Codeception\Test\Unit;
 use Generated\Shared\Transfer\ItemTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 
-class QuoteItemValidationMessageCleanerTest extends Unit
+class QuoteValidationMessageClearerTest extends Unit
 {
     /**
-     * @var \FondOfSpryker\Zed\CartValidation\Business\Model\QuoteItemValidationMessageCleaner
+     * @var \FondOfSpryker\Zed\CartValidation\Business\Clearer\QuoteValidationMessageClearer
      */
-    protected $quoteItemValidationMessageCleaner;
+    protected $quoteItemValidationMessageClearer;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\QuoteTransfer
@@ -47,7 +48,7 @@ class QuoteItemValidationMessageCleanerTest extends Unit
             $this->itemTransferMock,
         ];
 
-        $this->quoteItemValidationMessageCleaner = new QuoteItemValidationMessageCleaner();
+        $this->quoteItemValidationMessageClearer = new QuoteValidationMessageClearer();
     }
 
     /**
@@ -55,17 +56,19 @@ class QuoteItemValidationMessageCleanerTest extends Unit
      */
     public function testClearValidationMessages(): void
     {
-        $this->quoteTransferMock->expects($this->atLeastOnce())
-            ->method('getItems')
-            ->willReturn($this->itemTransferMocks);
-
-        $this->itemTransferMock->expects($this->atLeastOnce())
+        $this->quoteTransferMock->expects(static::atLeastOnce())
             ->method('setValidationMessages')
-            ->willReturn($this->itemTransferMock);
+            ->with(
+                static::callback(
+                    static function (ArrayObject $validationMessages) {
+                        return $validationMessages->count() === 0;
+                    }
+                )
+            )->willReturn($this->quoteTransferMock);
 
-        $this->assertInstanceOf(
-            QuoteTransfer::class,
-            $this->quoteItemValidationMessageCleaner->clearValidationMessages($this->quoteTransferMock)
+        static::assertEquals(
+            $this->quoteTransferMock,
+            $this->quoteItemValidationMessageClearer->clear($this->quoteTransferMock)
         );
     }
 }
