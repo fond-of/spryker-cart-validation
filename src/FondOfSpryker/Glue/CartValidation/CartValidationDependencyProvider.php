@@ -11,7 +11,14 @@ use Spryker\Glue\Kernel\Container;
 
 class CartValidationDependencyProvider extends AbstractBundleDependencyProvider
 {
+    /**
+     * @var string
+     */
     public const CLIENT_GLOSSARY_STORAGE = 'CLIENT_GLOSSARY_STORAGE';
+
+    /**
+     * @var string
+     */
     public const CLIENT_LOCALE = 'CLIENT_LOCALE';
 
     /**

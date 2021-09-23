@@ -37,7 +37,7 @@ class ValidationMessageTranslator implements ValidationMessageTranslatorInterfac
     /**
      * @param \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceInterface[] $resources
      *
-     * @return \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceInterface[] $resources
+     * @return \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceInterface[]
      */
     public function translate(array $resources): array
     {
@@ -68,7 +68,9 @@ class ValidationMessageTranslator implements ValidationMessageTranslatorInterfac
     }
 
     /**
-     * @return void
+     * @param \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceInterface $resource
+     *
+     * @return \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceInterface
      */
     protected function translateOnQuoteItemLevel(RestResourceInterface $resource): RestResourceInterface
     {
